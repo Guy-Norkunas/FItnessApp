@@ -1,6 +1,3 @@
-require "GuysFitnessApp/version"
+require_relative "GuysFitnessApp/version"
 
-module GuysFitnessApp
-  class Error < StandardError; end
-  # Your code goes here...
-end
+puts "hello world"
