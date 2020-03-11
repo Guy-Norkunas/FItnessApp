@@ -1,7 +1,6 @@
 require 'io/console'
 require 'csv'
 
-
 class Login
   attr_accessor :loginid, :username
 
@@ -31,7 +30,10 @@ class Login
         return self.signup()
       end
 
-      puts "invalid input"
+      print "invalid input, type exit to abort: "
+      if gets.strip.downcase == "exit"
+        exit
+      end
     end
   end
 
@@ -73,7 +75,7 @@ class Login
       password2 = STDIN.noecho(&:gets).strip
 
       if password1 == password2
-        loginid = hash_func(username, password1)
+        loginid = self.hash_func(username, password1)
         CSV.open("users.csv", "a") do |csv|
           csv << [username, loginid]
         end
