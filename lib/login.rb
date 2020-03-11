@@ -17,10 +17,7 @@ class Login
 
   def initialize
     @loginid = start()
-    print "\n\n"
-    puts @loginid
     @username = @@usernames[@@loginids.index(@loginid)]
-    puts @username
   end
 
   def start()
