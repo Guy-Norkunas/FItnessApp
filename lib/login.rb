@@ -1,11 +1,13 @@
 require 'io/console'
 require 'csv'
+require 'tty-prompt'
 
 class Login
   attr_accessor :loginid, :username
 
   @@loginids = []
   @@usernames = []
+  @@prompt = TTY::Prompt.new
 
   @@csv_users = File.read('users.csv')
   @@csv_users_parsed = CSV.parse(@@csv_users, :headers => true)
@@ -41,8 +43,7 @@ class Login
     while true
       print "username: "
       username = gets.strip
-      print "password: "
-      password = STDIN.noecho(&:gets).strip
+      password = @@prompt.mask("password:")
       loginid = self.hash_func(username, password)
 
       if @@loginids.include?(loginid)
@@ -69,10 +70,8 @@ class Login
         next
       end
 
-      print "password: "
-      password1 = STDIN.noecho(&:gets).strip
-      print "\nconfirm password: "
-      password2 = STDIN.noecho(&:gets).strip
+      password1 = password = @@prompt.mask("password:")
+      password2 = password = @@prompt.mask("confirm password:")
 
       if password1 == password2
         loginid = self.hash_func(username, password1)
@@ -105,3 +104,5 @@ class Login
     return hashAddress
   end
 end
+
+guy = Login.new()

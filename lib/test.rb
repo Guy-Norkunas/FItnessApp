@@ -1,12 +1,11 @@
-def hash_func(user, pass)
-  hashAddress = 5381
-  i = 0
-  string = user + pass
-  while i < string.length
-    hashAddress = ((hashAddress << 5) + hashAddress) + string[i].ord
-    i += 1
-  end
-  return hashAddress
-end
+require 'tty-table'
+require 'tty-prompt'
+prompt = TTY::Prompt.new
 
-p hash_func("guy", "password")
+table = TTY::Table.new  ["header 1", "header 2"], [[1, 2],[3, 4]]
+puts table
+
+input = prompt.mask("What is your secret?")
+input2 = prompt.mask("What is your secret?")
+puts input
+puts input2
