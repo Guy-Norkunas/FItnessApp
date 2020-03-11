@@ -11,6 +11,7 @@ puts "Logged in as #{user.username}"
 
 user_data = User_Data.new(user.loginid)
 
+pp user_data.data
 # p csv_text = File.read("#{user.loginid}.csv")
 
 

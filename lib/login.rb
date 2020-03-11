@@ -3,7 +3,7 @@ require 'csv'
 require 'tty-prompt'
 
 class Login
-  attr_accessor :loginid, :username
+  attr_reader :loginid, :username
 
   @@loginids = []
   @@usernames = []
@@ -19,6 +19,7 @@ class Login
   def initialize
     @loginid = start()
     @username = @@usernames[@@loginids.index(@loginid)]
+    system 'clear'
   end
 
   def start()
@@ -104,5 +105,3 @@ class Login
     return hashAddress
   end
 end
-
-guy = Login.new()

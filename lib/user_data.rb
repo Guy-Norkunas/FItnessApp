@@ -1,6 +1,8 @@
 require 'csv'
 
 class User_Data
+  attr_reader :data
+
   @@header = ["heading 1", "heading 2", "heading 3"]
 
   def initialize(loginid)
@@ -9,25 +11,21 @@ class User_Data
   
   def start(loginid)
     if File.size?("#{loginid}.csv")
-      puts "the file exists"
       return self.read_file("#{loginid}.csv")
     else
-      puts "the file doesn't exist"
       return self.create_file("#{loginid}.csv")
     end
   end
 
   def read_file(filename)
     data = []
-    puts "got here"
     csv_data = File.read(filename)
     csv_data_parsed = CSV.parse(csv_data, :headers => true)
     csv_data_parsed.each { |line|
-      data << {heading1: line[0], 
-              heading2: line[1],
-              heading3: line[2]}
+      data << {heading1: line["heading 1"], 
+              heading2: line["heading 2"],
+              heading3: line["heading 3"]}
     }
-    pp data
     return data
   end
 
