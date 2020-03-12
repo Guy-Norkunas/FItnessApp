@@ -60,8 +60,7 @@ class User_Data
       if gets.strip.downcase == "exit"
         return false
       end
-      self.display
-      return false
+      return self.display()
     end
     return temp2
   end
@@ -83,9 +82,23 @@ class User_Data
   end
 
   def delete()
-    temp = self.display()
+    pp temp = self.display()
+    print "Enter a date you would like to delete: "
+    input = gets.strip
     
+    temp.each { |exercise|
+      if exercise[0] == input
+        p exercise
+        table = CSV.table("./data/#{@loginid}.csv")
+        table.delete_if do |row|  
+          (row.to_hash[:date] == exercise[0]) && (row.to_hash[:exercise] == exercise[1])
+        end
 
-
+        File.open("./data/#{@loginid}.csv", 'w') do |f|
+          f.write(table.to_csv)
+        end
+      end
+    }
+    @data = get_data(@loginid)
   end
 end
