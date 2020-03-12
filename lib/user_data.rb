@@ -64,8 +64,11 @@ class User_Data
     }
 
     if !found
-      puts "invalid input, type exit to abort: "
-      if $stdin.gets.strip.downcase == "exit"
+      input = $prompt.select("Invalid exercise") do |menu|
+        menu.choice name: "Continue",  value: "anything"
+        menu.choice name: "Abort", value: "exit"
+      end
+      if input == "exit"
         return false
       end
       return self.display()
@@ -91,12 +94,20 @@ class User_Data
   end
 
   def delete()
+    found = false
+
     exercise = self.display()
+
+    if !exercise
+      return false
+    end
+
     print "Enter a date you would like to delete: "
     date = $stdin.gets.strip
     
     @data.each { |hash|
       if (hash[:exercise] == exercise) && (hash[:date] == date)
+        found = true
         table = CSV.table("./data/#{@loginid}.csv")
         table.delete_if do |row|
           (row.to_hash[:date] == hash[:date]) && (row.to_hash[:exercise] == hash[:exercise])
@@ -108,5 +119,15 @@ class User_Data
       end
     }
     @data = get_data(@loginid)
+
+    if !found
+    input = $prompt.select("Invalid date") do |menu|
+        menu.choice name: "Continue",  value: "anything"
+        menu.choice name: "Abort", value: "exit"
+      end
+      if input == "exit"
+        return false
+      end
+    end
   end
 end

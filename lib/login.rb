@@ -6,7 +6,6 @@ class Login
 
   @@usernames = []
   @@loginids = []
-  @@prompt = TTY::Prompt.new
 
   @@csv_users = File.read('./data/users.csv')
   @@csv_users_parsed = CSV.parse(@@csv_users, :headers => true)
@@ -23,7 +22,7 @@ class Login
 
   def start()
     while true
-      input = @@prompt.select("What would you like to do?") do |menu|
+      input = $prompt.select("What would you like to do?") do |menu|
       menu.choice name: "Log in",  value: "login"
       menu.choice name: "Sign up", value: "signup"
       menu.choice name: "Exit", value: "anything"
@@ -45,14 +44,14 @@ class Login
     while true
       print "username: "
       username = $stdin.gets.strip
-      password = @@prompt.mask("password:")
+      password = $prompt.mask("password:")
       loginid = self.hash_func(username, password)
 
       if @@loginids.include?(loginid)
         return loginid
       end
 
-      input = @@prompt.select("Invalid username or password") do |menu|
+      input = $prompt.select("Invalid username or password") do |menu|
         menu.choice name: "Continue",  value: "anything"
         menu.choice name: "Abort", value: "exit"
       end
@@ -68,7 +67,7 @@ class Login
       username = $stdin.gets.strip
 
       if @@usernames.include?(username)
-        input = @@prompt.select("Username is already taken") do |menu|
+        input = $prompt.select("Username is already taken") do |menu|
           menu.choice name: "Continue",  value: "anything"
           menu.choice name: "Abort", value: "exit"
         end
@@ -78,8 +77,8 @@ class Login
         next
       end
 
-      password1 = password = @@prompt.mask("password:")
-      password2 = password = @@prompt.mask("confirm password:")
+      password1 = password = $prompt.mask("password:")
+      password2 = password = $prompt.mask("confirm password:")
 
       if password1 == password2
         loginid = self.hash_func(username, password1)
