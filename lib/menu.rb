@@ -1,14 +1,15 @@
 require 'tty-prompt'
+require 'colorize'
 
 $prompt = TTY::Prompt.new
 
 def main_menu()
   while true
-    input = $prompt.select("What would you like to do?") do |menu|
-      menu.choice name: "View exercises",  value: 1
-      menu.choice name: "Record new exercise", value: 2
-      menu.choice name: "Remove an exercise",  value: 3
-      menu.choice name: "Exit program", value: "exit"
+    input = $prompt.select("What would you like to do?".colorize(:blue)) do |menu|
+      menu.choice name: "View exercises".colorize(:light_blue),  value: 1
+      menu.choice name: "Record new exercise".colorize(:light_blue), value: 2
+      menu.choice name: "Remove an exercise".colorize(:light_blue),  value: 3
+      menu.choice name: "Exit program".colorize(:light_blue), value: "exit"
     end
 
     case input

@@ -22,10 +22,10 @@ class Login
 
   def start()
     while true
-      input = $prompt.select("What would you like to do?") do |menu|
-      menu.choice name: "Log in",  value: "login"
-      menu.choice name: "Sign up", value: "signup"
-      menu.choice name: "Exit", value: "anything"
+      input = $prompt.select("What would you like to do?".colorize(:blue)) do |menu|
+      menu.choice name: "Log in".colorize(:light_blue),  value: "login"
+      menu.choice name: "Sign up".colorize(:light_blue), value: "signup"
+      menu.choice name: "Exit".colorize(:red), value: "anything"
       end
 
       if input.downcase == "login"
@@ -34,7 +34,7 @@ class Login
         return self.signup()
       else
         system 'clear'
-        puts "Thanks for using my program"
+        puts "Thanks for using my program".colorize(:green)
         exit
       end
     end
@@ -42,18 +42,18 @@ class Login
 
   def login()
     while true
-      print "username: "
+      print "username: ".colorize(:light_blue)
       username = $stdin.gets.strip
-      password = $prompt.mask("password:")
+      password = $prompt.mask("password:".colorize(:light_blue))
       loginid = self.hash_func(username, password)
 
       if @@loginids.include?(loginid)
         return loginid
       end
 
-      input = $prompt.select("Invalid username or password") do |menu|
-        menu.choice name: "Continue",  value: "anything"
-        menu.choice name: "Abort", value: "exit"
+      input = $prompt.select("Invalid username or password".colorize(:blue)) do |menu|
+        menu.choice name: "Continue".colorize(:light_blue),  value: "anything"
+        menu.choice name: "Abort".colorize(:red), value: "exit"
       end
       if input == "exit"
         return self.start
@@ -63,22 +63,22 @@ class Login
 
   def signup()
     while true
-      print "desired username: "
+      print "desired username: ".colorize(:light_blue)
       username = $stdin.gets.strip
 
       if @@usernames.include?(username)
-        input = $prompt.select("Username is already taken") do |menu|
-          menu.choice name: "Continue",  value: "anything"
-          menu.choice name: "Abort", value: "exit"
+        input = $prompt.select("Username is already taken".colorize(:blue)) do |menu|
+          menu.choice name: "Continue".colorize(:light_blue),  value: "anything"
+          menu.choice name: "Abort".colorize(:red), value: "exit"
         end
-        if $stdin.gets.strip.downcase == "exit"
+        if input == "exit"
           return self.start
         end
         next
       end
 
-      password1 = password = $prompt.mask("password:")
-      password2 = password = $prompt.mask("confirm password:")
+      password1 = password = $prompt.mask("password:".colorize(:light_blue))
+      password2 = password = $prompt.mask("confirm password:".colorize(:light_blue))
 
       if password1 == password2
         loginid = self.hash_func(username, password1)
@@ -91,8 +91,11 @@ class Login
         return loginid
       end
 
-      puts "passwords didnt match, type exit to abort"
-      if $stdin.gets.strip.downcase == "exit"
+      input = $prompt.select("Passwords didn't match".colorize(:blue)) do |menu|
+          menu.choice name: "Continue".colorize(:light_blue),  value: "anything"
+          menu.choice name: "Abort".colorize(:red), value: "exit"
+        end
+      if input == "exit"
         return self.start
       end
     end

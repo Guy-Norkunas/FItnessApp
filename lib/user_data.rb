@@ -46,27 +46,27 @@ class User_Data
 
     @data.each { |hash|
       if !unique.include?(hash[:exercise])
-        print "option #{counter}: #{hash[:exercise]}\n"
+        print "option #{counter}: #{hash[:exercise]}\n".colorize(:light_blue)
         unique << hash[:exercise]
         counter += 1
       end
 
     }
 
-    print "\nwhat exercise would you like to see the contents of?: "
+    print "\nwhat exercise would you like to see the contents of?: ".colorize(:blue)
     input = $stdin.gets.strip.downcase
-    puts "Data for #{input}"
+    puts "Data for #{input}".colorize(:light_blue)
     @data.each { |hash|
       if hash[:exercise] == input
-        puts "Date: #{hash[:date]}, Weight: #{hash[:weight]}, Sets: [#{hash[:sets]}]"
+        puts "Date: #{hash[:date]}, Weight: #{hash[:weight]}, Sets: [#{hash[:sets]}]".colorize(:yellow)
         found = true
       end
     }
 
     if !found
-      input = $prompt.select("Invalid exercise") do |menu|
-        menu.choice name: "Continue",  value: "anything"
-        menu.choice name: "Abort", value: "exit"
+      input = $prompt.select("Invalid exercise".colorize(:blue)) do |menu|
+        menu.choice name: "Continue".colorize(:light_blue),  value: "anything"
+        menu.choice name: "Abort".colorize(:red), value: "exit"
       end
       if input == "exit"
         return false
@@ -78,13 +78,13 @@ class User_Data
   end
 
   def record()
-    print "The date in dd/mm/yyyy format: "
+    print "The date in dd/mm/yyyy format: ".colorize(:light_blue)
     date = $stdin.gets.strip
-    print "Name of the exercise: "
+    print "Name of the exercise: ".colorize(:light_blue)
     exercise = $stdin.gets.strip.downcase
-    print "What was your working weight?: "
+    print "What was your working weight?: ".colorize(:light_blue)
     weight = $stdin.gets.strip
-    print "How many reps per set? in set1,set2,set3 format: "
+    print "How many reps per set? in set1,set2,set3 format: ".colorize(:light_blue)
     sets = $stdin.gets.strip
 
     CSV.open("./data/#{@loginid}.csv", "a+") do |csv|
@@ -102,7 +102,7 @@ class User_Data
       return false
     end
 
-    print "Enter a date you would like to delete: "
+    print "Enter a date you would like to delete: ".colorize(:blue)
     date = $stdin.gets.strip
     
     @data.each { |hash|
@@ -121,13 +121,14 @@ class User_Data
     @data = get_data(@loginid)
 
     if !found
-    input = $prompt.select("Invalid date") do |menu|
-        menu.choice name: "Continue",  value: "anything"
-        menu.choice name: "Abort", value: "exit"
+    input = $prompt.select("Invalid date".colorize(:blue)) do |menu|
+        menu.choice name: "Continue".colorize(:light_blue),  value: "anything"
+        menu.choice name: "Abort".colorize(:red), value: "exit"
       end
       if input == "exit"
         return false
       end
+      return self.delete
     end
   end
 end
