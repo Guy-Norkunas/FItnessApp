@@ -55,7 +55,10 @@ class User_Data
       end
     }
     if temp2.length == 0
-      puts "invalid input"
+      puts "invalid input, type exit to abort: "
+      if gets.strip.downcase == "exit"
+        return false
+      end
       self.display
       return false
     end
