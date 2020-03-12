@@ -1,15 +1,14 @@
-require 'io/console'
 require 'csv'
 require 'tty-prompt'
 
 class Login
   attr_reader :loginid, :username
 
-  @@loginids = []
   @@usernames = []
+  @@loginids = []
   @@prompt = TTY::Prompt.new
 
-  @@csv_users = File.read('users.csv')
+  @@csv_users = File.read('./data/users.csv')
   @@csv_users_parsed = CSV.parse(@@csv_users, :headers => true)
   @@csv_users_parsed.each { |line|
     @@usernames << line[0]
@@ -19,7 +18,7 @@ class Login
   def initialize
     @loginid = start()
     @username = @@usernames[@@loginids.index(@loginid)]
-    system 'clear'
+    @slackid = slack_setup()
   end
 
   def start()
@@ -76,7 +75,7 @@ class Login
 
       if password1 == password2
         loginid = self.hash_func(username, password1)
-        CSV.open("users.csv", "a") do |csv|
+        CSV.open("./data/users.csv", "a") do |csv|
           csv << [username, loginid]
         end
 
@@ -103,5 +102,8 @@ class Login
     end
 
     return hashAddress
+  end
+
+  def slack_setup()
   end
 end

@@ -1,11 +1,33 @@
-require 'tty-table'
-require 'tty-prompt'
-prompt = TTY::Prompt.new
+require_relative '../token/token.rb'
+require "uri"
+require "net/http"
+require 'json'
 
-table = TTY::Table.new  ["header 1", "header 2"], [[1, 2],[3, 4]]
-puts table
 
-input = prompt.mask("What is your secret?")
-input2 = prompt.mask("What is your secret?")
-puts input
-puts input2
+url = URI("https://slack.com/api/users.list")
+
+https = Net::HTTP.new(url.host, url.port);
+https.use_ssl = true
+
+request = Net::HTTP::Get.new(url)
+request["Content-Type"] = "application/x-www-form-urlencoded"
+request["Authorization"] = Auth::BotUserToken
+request.body = "="
+
+response = https.request(request)
+a = response.read_body
+my_hash = JSON.parse(a)
+pp my_hash
+
+# url = URI("https://slack.com/api/chat.postMessage")
+
+# https = Net::HTTP.new(url.host, url.port);
+# https.use_ssl = true
+
+# request = Net::HTTP::Post.new(url)
+# request["Content-Type"] = "application/json"
+# request["Authorization"] = Auth::BotUserToken
+# form_data = [['channel', '#general'],['text', 'hello world']]
+# request.set_form form_data, 'multipart/form-data'
+# response = https.request(request)
+# puts response.read_body
