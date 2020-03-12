@@ -6,11 +6,6 @@ require "tty-prompt"
 
 system 'clear'
 
-
-thing = ARGV
-p thing
-
-
 user = Login.new()
 
 puts "Logged in as #{user.username}"
