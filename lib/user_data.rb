@@ -42,7 +42,7 @@ class User_Data
   def display()
     temp = []
     temp2 = []
-    print "what exercise would you like to see the details for?: "
+    print "what exercise would you like to see the contents of?: "
     input = gets.strip.downcase
 
     @data.each { |hash|
@@ -54,6 +54,7 @@ class User_Data
         temp2 << temp
       end
     }
+
     if temp2.length == 0
       puts "invalid input, type exit to abort: "
       if gets.strip.downcase == "exit"
@@ -62,8 +63,7 @@ class User_Data
       self.display
       return false
     end
-    pp temp2
-    return true
+    return temp2
   end
 
   def record()
@@ -80,5 +80,12 @@ class User_Data
       csv << [date, exercise, weight, sets]
     end
     @data = get_data(@loginid)
+  end
+
+  def delete()
+    temp = self.display()
+    
+
+
   end
 end

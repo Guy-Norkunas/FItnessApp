@@ -55,11 +55,11 @@ def exercise_menu()
 
     case input
     when 1
-      $user_data.display
+      pp $user_data.display()
     when 2
       $user_data.record
     when 3
-      $user_data.remove
+      $user_data.delete
     when "exit"
       break
     else
@@ -88,6 +88,4 @@ $user_data = User_Data.new(user.loginid)
 
 while true 
   main_menu()
-
-
 end
