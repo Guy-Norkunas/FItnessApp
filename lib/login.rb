@@ -24,7 +24,7 @@ class Login
   def start()
     while true
       print "Login or signup?: "
-      input = gets.strip
+      input = $stdin.gets.strip
 
       if input.downcase == "login"
         return self.login()
@@ -42,7 +42,7 @@ class Login
   def login()
     while true
       print "username: "
-      username = gets.strip
+      username = $stdin.gets.strip
       password = @@prompt.mask("password:")
       loginid = self.hash_func(username, password)
 
@@ -51,7 +51,7 @@ class Login
       end
 
       print "invalid username or password, type exit to abort: "
-      if gets.strip.downcase == "exit"
+      if $stdin.gets.strip.downcase == "exit"
         return self.start
       end
     end
@@ -60,11 +60,11 @@ class Login
   def signup()
     while true
       print "desired username: "
-      username = gets.strip
+      username = $stdin.gets.strip
 
       if @@usernames.include?(username)
         puts "username already taken, type exit to abort: "
-        if gets.strip.downcase == "exit"
+        if $stdin.gets.strip.downcase == "exit"
           return self.start
         end
         next
@@ -85,7 +85,7 @@ class Login
       end
 
       puts "passwords didnt match, type exit to abort"
-      if gets.strip.downcase == "exit"
+      if $stdin.gets.strip.downcase == "exit"
         return self.start
       end
     end

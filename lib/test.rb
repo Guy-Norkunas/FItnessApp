@@ -1,23 +1,29 @@
-require_relative '../token/token.rb'
-require "uri"
-require "net/http"
-require 'json'
 
 
-url = URI("https://slack.com/api/users.list")
+x = File.open("./data/default").each do |line|
+  p line.length
+end
+p x
+# require_relative '../token/token.rb'
+# require "uri"
+# require "net/http"
+# require 'json'
 
-https = Net::HTTP.new(url.host, url.port);
-https.use_ssl = true
 
-request = Net::HTTP::Get.new(url)
-request["Content-Type"] = "application/x-www-form-urlencoded"
-request["Authorization"] = Auth::BotUserToken
-request.body = "="
+# url = URI("https://slack.com/api/users.list")
 
-response = https.request(request)
-a = response.read_body
-my_hash = JSON.parse(a)
-pp my_hash
+# https = Net::HTTP.new(url.host, url.port);
+# https.use_ssl = true
+
+# request = Net::HTTP::Get.new(url)
+# request["Content-Type"] = "application/x-www-form-urlencoded"
+# request["Authorization"] = Auth::BotUserToken
+# request.body = "="
+
+# response = https.request(request)
+# a = response.read_body
+# my_hash = JSON.parse(a)
+# pp my_hash
 
 # url = URI("https://slack.com/api/chat.postMessage")
 

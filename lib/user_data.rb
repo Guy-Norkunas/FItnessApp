@@ -43,7 +43,7 @@ class User_Data
     temp = []
     temp2 = []
     print "what exercise would you like to see the contents of?: "
-    input = gets.strip.downcase
+    input = $stdin.gets.strip.downcase
 
     @data.each { |hash|
       temp = []
@@ -57,7 +57,7 @@ class User_Data
 
     if temp2.length == 0
       puts "invalid input, type exit to abort: "
-      if gets.strip.downcase == "exit"
+      if $stdin.gets.strip.downcase == "exit"
         return false
       end
       return self.display()
@@ -67,13 +67,13 @@ class User_Data
 
   def record()
     print "The date in dd/mm/yyyy format: "
-    date = gets.strip
+    date = $stdin.gets.strip
     print "Name of the exercise: "
-    exercise = gets.strip.downcase
+    exercise = $stdin.gets.strip.downcase
     print "What was your working weight?: "
-    weight = gets.strip
+    weight = $stdin.gets.strip
     print "How many reps per set? in set1,set2,set3 format: "
-    sets = gets.strip
+    sets = $stdin.gets.strip
 
     CSV.open("./data/#{@loginid}.csv", "a+") do |csv|
       csv << [date, exercise, weight, sets]
@@ -84,7 +84,7 @@ class User_Data
   def delete()
     pp temp = self.display()
     print "Enter a date you would like to delete: "
-    input = gets.strip
+    input = $stdin.gets.strip
     
     temp.each { |exercise|
       if exercise[0] == input
