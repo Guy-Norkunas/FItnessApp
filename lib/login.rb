@@ -23,17 +23,19 @@ class Login
 
   def start()
     while true
-      print "Login or signup?: "
-      input = $stdin.gets.strip
+      input = @@prompt.select("What would you like to do?") do |menu|
+      menu.choice name: "Log in",  value: "login"
+      menu.choice name: "Sign up", value: "signup"
+      menu.choice name: "Exit", value: "anything"
+      end
 
       if input.downcase == "login"
         return self.login()
       elsif input.downcase == "signup"
         return self.signup()
-      end
-
-      print "invalid input, type exit to abort: "
-      if gets.strip.downcase == "exit"
+      else
+        system 'clear'
+        puts "Thanks for using my program"
         exit
       end
     end
@@ -50,8 +52,11 @@ class Login
         return loginid
       end
 
-      print "invalid username or password, type exit to abort: "
-      if $stdin.gets.strip.downcase == "exit"
+      input = @@prompt.select("Invalid username or password") do |menu|
+        menu.choice name: "Continue",  value: "anything"
+        menu.choice name: "Abort", value: "exit"
+      end
+      if input == "exit"
         return self.start
       end
     end
@@ -63,7 +68,10 @@ class Login
       username = $stdin.gets.strip
 
       if @@usernames.include?(username)
-        puts "username already taken, type exit to abort: "
+        input = @@prompt.select("Username is already taken") do |menu|
+          menu.choice name: "Continue",  value: "anything"
+          menu.choice name: "Abort", value: "exit"
+        end
         if $stdin.gets.strip.downcase == "exit"
           return self.start
         end

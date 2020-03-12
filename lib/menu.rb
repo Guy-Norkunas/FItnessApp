@@ -2,9 +2,7 @@ require 'tty-prompt'
 
 $prompt = TTY::Prompt.new
 
-
 def main_menu()
-  system 'clear'
   while true
     input = $prompt.select("What would you like to do?") do |menu|
       menu.choice name: "Workout options",  value: 1
@@ -42,7 +40,6 @@ end
 # end
 
 def exercise_menu()
-  system 'clear'
   while true
     input = $prompt.select("What would you like to do?") do |menu|
       menu.choice name: "View exercises",  value: 1
@@ -53,7 +50,7 @@ def exercise_menu()
 
     case input
     when 1
-      pp $user_data.display()
+      $user_data.display()
     when 2
       $user_data.record
     when 3

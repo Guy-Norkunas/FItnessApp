@@ -12,7 +12,7 @@ if ARGV.length == 0
   $user_data = User_Data.new(user.loginid)
 else
   case ARGV[0]
-  
+
   when "set-default"
     puts "set default login"
     user = Login.new()

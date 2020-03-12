@@ -40,29 +40,38 @@ class User_Data
   end
 
   def display()
-    temp = []
-    temp2 = []
-    print "what exercise would you like to see the contents of?: "
-    input = $stdin.gets.strip.downcase
+    unique = []
+    counter = 1
+    found = false
 
     @data.each { |hash|
-      temp = []
+      if !unique.include?(hash[:exercise])
+        print "option #{counter}: #{hash[:exercise]}\n"
+        unique << hash[:exercise]
+        counter += 1
+      end
+
+    }
+
+    print "\nwhat exercise would you like to see the contents of?: "
+    input = $stdin.gets.strip.downcase
+    puts "Data for #{input}"
+    @data.each { |hash|
       if hash[:exercise] == input
-        hash.each{ |k,v|
-          temp << v
-        }
-        temp2 << temp
+        puts "Date: #{hash[:date]}, Weight: #{hash[:weight]}, Sets: [#{hash[:sets]}]"
+        found = true
       end
     }
 
-    if temp2.length == 0
+    if !found
       puts "invalid input, type exit to abort: "
       if $stdin.gets.strip.downcase == "exit"
         return false
       end
       return self.display()
     end
-    return temp2
+    
+    return input
   end
 
   def record()
@@ -82,16 +91,15 @@ class User_Data
   end
 
   def delete()
-    pp temp = self.display()
+    exercise = self.display()
     print "Enter a date you would like to delete: "
-    input = $stdin.gets.strip
+    date = $stdin.gets.strip
     
-    temp.each { |exercise|
-      if exercise[0] == input
-        p exercise
+    @data.each { |hash|
+      if (hash[:exercise] == exercise) && (hash[:date] == date)
         table = CSV.table("./data/#{@loginid}.csv")
-        table.delete_if do |row|  
-          (row.to_hash[:date] == exercise[0]) && (row.to_hash[:exercise] == exercise[1])
+        table.delete_if do |row|
+          (row.to_hash[:date] == hash[:date]) && (row.to_hash[:exercise] == hash[:exercise])
         end
 
         File.open("./data/#{@loginid}.csv", 'w') do |f|
