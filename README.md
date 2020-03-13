@@ -6,7 +6,7 @@ GuysFitnessApp is a terminal app that allows multiple people to store and view t
 
 
 ## Links
-[Github] https://Github.com/Guy-Norkunas/GuysFitnessApp
+[Github] https://Github.com/Guy-Norkunas/FitnessApp
 
 ## Description
 
@@ -14,6 +14,15 @@ When a user makes an account they are given a unique login id which is made from
 
 Once logged in the user needs some data, all data in this program is stored as a csv and every csv that holds data is unique to each user, this is done by making a new csv on account creation that is automatically given a header that is used in the program. Once the user has data, viewing, adding, and removing data is simple.
 
+GuysFitnessApp solves the problem of having to manually track your own workouts and spares you from using another app where most of the features are locked behind a paywall, or the design itself is just confusing. GuysFitnessApp is a simple approach to storing your workout data and allows for ease of access.
+
+It will also solve another problem that people who are interested in working out face, and that is that it's quite hard to see progress when you just work out and don't pay attention to what it is you're doing in the gym. This terminal app allows for you to keep track of where you're at so you know exactly how to always push yourself. And it'll allow you to see your progress and smash goals that you set for yourself.
+
+## Target audience
+
+The target audience of GuysFitnessApp is anyone who is interested in tracking their progressing in the gym. There is no specific age group or gender targetted by the app and instead has a very wide and diverse group of potential users.
+
+The target audience, being people who want to track their workouts, will use this app after a workout, simply run the program, type in the exercises they performed and then they can run "view exercises" to see their progression and mark their progress against goals they have set for themselves. Having access to your workout data is great motivation, sometimes it's hard to see progress when you don't look at the big picture.
 
 ## Installation
 
@@ -75,9 +84,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Guy-Norkunas/GuysFitnessApp. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/Guy-Norkunas/GuysFitnessApp/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/Guy-Norkunas/GuysFitnessApp. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/Guy-Norkunas/  FitnessApp/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## Code of Conduct
 
-Everyone interacting in the GuysFitnessApp project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Guy-Norkunas/GuysFitnessApp/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the GuysFitnessApp project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Guy-Norkunas/FitnessApp/blob/master/CODE_OF_CONDUCT.md).

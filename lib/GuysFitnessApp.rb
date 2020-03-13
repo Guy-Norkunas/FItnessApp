@@ -2,7 +2,6 @@ require_relative "GuysFitnessApp/version"
 require_relative "login"
 require_relative "user_data"
 require_relative "menu"
-require "tty-prompt"
 require "colorize"
 
 system 'clear'
